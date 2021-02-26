@@ -16,7 +16,7 @@
     <section>
       <launch-list v-if="!filterData" :launches='launches'></launch-list>
       <launch-list v-if="filterData" :launches='filteredLaunches'></launch-list>
-      <launch-details v-if="selectedLaunch" :launch='selectedLaunch' :nextIndex='index' :launches='launches'></launch-details>
+      <launch-details v-if="selectedLaunch" :launches='launches' :index='selectedLaunchIndex'></launch-details>
     </section>
     
   </main>
@@ -38,7 +38,7 @@ export default {
       filteredLaunches: [],
       selectedLaunch: null,
       filterData: null,
-      index: null,
+      selectedLaunchIndex: null
     }
   },
   components: {
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     getLaunchData: function() {
-      fetch('https://lldev.thespacedevs.com/2.0.0/launch/?limit=100&offset=1650')
+      fetch('https://lldev.thespacedevs.com/2.0.0/launch/?limit=100&offset=1600')
         .then(res => res.json())
         .then(data => this.launches = data.results)
     },
@@ -70,60 +70,63 @@ export default {
         }
       })
     },
-    selectedIdNext: function(launch) {
-      this.index = this.launches.indexOf(launch)
-      this.index++
+    selectedLaunchId: function() {
+      this.selectedLaunchIndex = this.launches.indexOf(this.selectedLaunch)
     },
-    selectedIdBack: function(launch) {
-      this.index = this.launches.indexOf(launch)
-      this.index--
+    selectedIdNext: function() {
+      this.selectedLaunchIndex++
+    },
+    selectedIdBack: function() {
+      this.selectedLaunchIndex--
     }
   },
   mounted() {
     this.getLaunchData()
 
-    eventBus.$on('selected-launch', (launch) => (this.selectedLaunch = launch, this.index = null))
+    eventBus.$on('selected-launch', (launch) => (this.selectedLaunch = launch, this.selectedLaunchId(), this.index = null))
     eventBus.$on('year-selected', (year) => this.dateYear(year))
     eventBus.$on('status-selected', (status) => this.statusMissions(status))
-    eventBus.$on('skip-next', (launch) => (this.index = null, this.selectedIdNext(launch)))
-    eventBus.$on('skip-back', (launch) => (this.index = null, this.selectedIdBack(launch)))
+    eventBus.$on('skip-next', () => (this.selectedIdNext()))
+    eventBus.$on('skip-back', () => (this.selectedIdBack()))
   }
 }
 </script>
 
 <style>
-* {
+body {
   box-sizing: border-box;
+  background-image: url("https://cdn.mos.cms.futurecdn.net/xePTkUayyCCn7QnVXUjhTg.jpg");
+  margin: 0;
 }
 
 main {
-  margin: 10px;
-  height: auto;
+  height: 100%;
+  margin: 15px;
+  color: white;
 }
 
 h1 {
   text-align: center;
   margin-bottom: 5px;
+  margin-top: 0px;
 }
 
 .filter-area {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 section {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   column-gap: 25px;
-  /* height: 70vh; */
+  margin-bottom: 10px;
 }
 
 select {
   border-radius: 12px;
   height: 30px;
   padding-left: 5px;
-  margin-bottom: 10px;
 }
 </style>

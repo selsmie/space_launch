@@ -24,6 +24,7 @@ ul {
   height: 80vh;
   overflow: auto;
   margin: 0;
+  list-style-type: decimal;
 }
 
 ul::-webkit-scrollbar {
