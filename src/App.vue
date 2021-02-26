@@ -16,7 +16,7 @@
     <section>
       <launch-list v-if="!filterData" :launches='launches'></launch-list>
       <launch-list v-if="filterData" :launches='filteredLaunches'></launch-list>
-      <launch-details v-if="selectedLaunch" :launch='selectedLaunch'></launch-details>
+      <launch-details v-if="selectedLaunch" :launch='selectedLaunch' :nextIndex='index' :launches='launches'></launch-details>
     </section>
     
   </main>
@@ -38,8 +38,7 @@ export default {
       filteredLaunches: [],
       selectedLaunch: null,
       filterData: null,
-      tests: [],
-      newTest: []
+      index: null,
     }
   },
   components: {
@@ -70,14 +69,24 @@ export default {
           this.filteredLaunches.push(launch)
         }
       })
+    },
+    selectedIdNext: function(launch) {
+      this.index = this.launches.indexOf(launch)
+      this.index++
+    },
+    selectedIdBack: function(launch) {
+      this.index = this.launches.indexOf(launch)
+      this.index--
     }
   },
   mounted() {
     this.getLaunchData()
 
-    eventBus.$on('selected-launch', (launch) => this.selectedLaunch = launch)
+    eventBus.$on('selected-launch', (launch) => (this.selectedLaunch = launch, this.index = null))
     eventBus.$on('year-selected', (year) => this.dateYear(year))
     eventBus.$on('status-selected', (status) => this.statusMissions(status))
+    eventBus.$on('skip-next', (launch) => (this.index = null, this.selectedIdNext(launch)))
+    eventBus.$on('skip-back', (launch) => (this.index = null, this.selectedIdBack(launch)))
   }
 }
 </script>
@@ -108,6 +117,7 @@ section {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   column-gap: 25px;
+  /* height: 70vh; */
 }
 
 select {
