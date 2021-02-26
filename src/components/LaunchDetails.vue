@@ -1,10 +1,11 @@
 <template>
-    <section>
+    <section class='details'>
         <h2>{{launch.name}}</h2>
-        <h3>{{launch.status.name}}</h3>
+        <h3 class='status'>{{launch.status.name}}</h3>
         <img :src="launch.image" alt="">
         <p>Date: {{launch.net | date}}</p>
-        <p>Mission: {{launch.mission.description}}</p>
+        <p id='obj'>Mission Objective</p>
+        <p>{{launch.mission.description}}</p>
     </section>
 </template>
 
@@ -21,7 +22,31 @@ export default {
 </script>
 
 <style>
+
+.details {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: flex-start;
+    justify-items: center;
+    text-align: justify;
+    /* width: 90%; */
+    justify-self: end;
+}
+
+.status {
+    margin-top: 0px;
+}
+
+#obj {
+    margin: 0;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 img {
-    height: 200px;
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    max-width: 300px;
 }
 </style>

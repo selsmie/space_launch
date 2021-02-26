@@ -1,9 +1,11 @@
 <template>
+<div>
+  <h2 v-if='launches.length > 0' id='number'>Number of Launches: {{launches.length}}</h2>
   <ul>
-      <h2 v-if='launches.length > 0'>Number of Launches: {{launches.length}}</h2>
-      <h5 v-if='launches.length === 0'>Selected filter parameters</h5>
-      <launch-list-item v-for='(launch, index) in launches' :key='index' :launch='launch'></launch-list-item>
+    <launch-list-item v-for='(launch, index) in launches' :key='index' :launch='launch'></launch-list-item>
   </ul>
+</div>
+ 
 </template>
 
 <script>
@@ -17,5 +19,19 @@ export default {
 </script>
 
 <style>
+
+ul {
+  height: 80vh;
+  overflow: auto;
+  margin: 0;
+}
+
+ul::-webkit-scrollbar {
+  display: none;
+}
+
+#number {
+  padding-left: 40px;
+}
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <li v-on:click='handleClick'>{{launch.name}} - {{launch.net | year}} - {{launch.status.name}}</li>
+  <li v-on:click='handleClick'>{{launch.name}} - {{launch.net | year}}</li>
 </template>
 
 <script>

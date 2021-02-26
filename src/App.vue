@@ -1,19 +1,24 @@
 <template>
   <main>
-    <div>
+    <h1>Rocket Launches</h1>
+    <div class='filter-area'>
       <select v-model='filterData'>
         <option value="">All Launches</option>
         <option value="year">Year</option>
         <option value="status">Mission Status</option>
       </select>
+   
+      <year-selection v-if="filterData==='year'"></year-selection>
+      <status-selection v-if="filterData==='status'"></status-selection>
     </div>
 
-    <year-selection v-if="filterData==='year'"></year-selection>
-    <status-selection v-if="filterData==='status'"></status-selection>
-
-    <launch-list v-if="!filterData" :launches='launches'></launch-list>
-    <launch-list v-if="filterData" :launches='filteredLaunches'></launch-list>
-    <launch-details v-if="selectedLaunch" :launch='selectedLaunch'></launch-details>
+   
+    <section>
+      <launch-list v-if="!filterData" :launches='launches'></launch-list>
+      <launch-list v-if="filterData" :launches='filteredLaunches'></launch-list>
+      <launch-details v-if="selectedLaunch" :launch='selectedLaunch'></launch-details>
+    </section>
+    
   </main>
 </template>
 
@@ -32,7 +37,9 @@ export default {
       launches: [],
       filteredLaunches: [],
       selectedLaunch: null,
-      filterData: null
+      filterData: null,
+      tests: [],
+      newTest: []
     }
   },
   components: {
@@ -47,7 +54,9 @@ export default {
         .then(res => res.json())
         .then(data => this.launches = data.results)
     },
+
     dateYear: function(year) {
+      this.filteredLaunches = []
       this.launches.forEach((launch) => {
         if (launch.net.slice(0, 4) === year){
           this.filteredLaunches.push(launch)
@@ -55,6 +64,7 @@ export default {
       })
     },
     statusMissions: function(status) {
+      this.filteredLaunches = []
       this.launches.forEach((launch) => {
         if (launch.status.name === status) {
           this.filteredLaunches.push(launch)
@@ -66,19 +76,44 @@ export default {
     this.getLaunchData()
 
     eventBus.$on('selected-launch', (launch) => this.selectedLaunch = launch)
-    
-    eventBus.$on('reset', () => {
-      this.launches = [],
-      this.filteredLaunches = []
-      })
-
     eventBus.$on('year-selected', (year) => this.dateYear(year))
-
     eventBus.$on('status-selected', (status) => this.statusMissions(status))
   }
 }
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+}
 
+main {
+  margin: 10px;
+  height: auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.filter-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+section {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  column-gap: 25px;
+}
+
+select {
+  border-radius: 12px;
+  height: 30px;
+  padding-left: 5px;
+  margin-bottom: 10px;
+}
 </style>

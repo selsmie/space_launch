@@ -6,6 +6,8 @@
             <option value="Success">Success</option>
             <option value="Failure">Failure</option>
             <option value="Partial Failure">Partial Failure</option>
+            <option value="Go">Ready To Launch</option>
+            <option value="TBD">Scheduled</option>
         </select>
         <input type="submit" value="Search" v-on:click="handleStatusSearch">
     </div>
@@ -30,5 +32,11 @@ export default {
 </script>
 
 <style>
-
+input {
+    border-radius: 12px;
+    height: 30px;
+    padding-left: 5px;
+    width: max-content;
+    margin: 5px;
+}
 </style>
