@@ -7,6 +7,7 @@
         <option value="all">All Launches</option>
         <option value="year">Year</option>
         <option value="status">Mission Status</option>
+        <option value="chart">Launch Location Chart</option>
       </select>
    
       <year-selection v-if="filterData==='year'"></year-selection>
@@ -19,7 +20,10 @@
       <launch-list v-if="filterData==='year' || filterData==='status'" :launches='filteredLaunches'></launch-list>
       <launch-details v-if="selectedLaunch" :launches='launches' :index='selectedLaunchIndex'></launch-details>
     </section>
-    
+
+    <div id='chart'>
+      <location-chart v-if="filterData==='chart'" :launches='launches'></location-chart>
+    </div>
   </main>
 </template>
 
@@ -28,6 +32,7 @@ import LaunchList from './components/LaunchList'
 import LaunchDetails from './components/LaunchDetails'
 import YearSelection from './components/YearSelection'
 import StatusSelection from './components/StatusSelection'
+import LocationChart from './components/LocationChart'
 
 import {eventBus} from './main.js'
 
@@ -46,7 +51,8 @@ export default {
     "launch-list": LaunchList,
     "launch-details": LaunchDetails,
     "year-selection": YearSelection,
-    "status-selection": StatusSelection
+    "status-selection": StatusSelection,
+    "location-chart": LocationChart
   },
   methods: {
     getLaunchData: function() {
@@ -138,5 +144,11 @@ select {
   border-radius: 12px;
   height: 30px;
   padding-left: 5px;
+}
+
+#chart {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 }
 </style>

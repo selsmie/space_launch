@@ -68,6 +68,10 @@ export default {
     grid-template-columns: 1fr;
 }
 
+.details::-webkit-scrollbar {
+  display: none;
+}
+
 .title {
     text-align: center;
 }
