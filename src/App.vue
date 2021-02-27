@@ -98,7 +98,7 @@ body {
   box-sizing: border-box;
   background-image: url("https://cdn.mos.cms.futurecdn.net/xePTkUayyCCn7QnVXUjhTg.jpg");
   margin: 0;
-  height: 100%;
+  width: 100%
 }
 
 main {

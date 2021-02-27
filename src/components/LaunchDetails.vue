@@ -81,7 +81,7 @@ export default {
     height: 83vh;
     width: 80%;
     justify-self: center;
-
+    overflow: scroll;
 }
 
 #description::-webkit-scrollbar {
