@@ -2,7 +2,7 @@
   <main>
     <h1>Rocket Launches</h1>
     <div class='filter-area'>
-      <select v-model='filterData'>
+      <select v-model='filterData' v-on:change='selectedLaunch=null'>
         <option disabled value="">Select Launches</option>
         <option value="all">All Launches</option>
         <option value="year">Year</option>
