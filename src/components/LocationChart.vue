@@ -12,8 +12,11 @@ export default {
         chartOptions: {
           title: 'Launch Locations by Country',
           legend: {position: 'right'},
-          height: 600,
-          width: 600
+          height: 400,
+          width: 700,
+         
+          chartArea: {left:140, top:40,width: '100%', height: '100%'},
+          pieSliceText: 'value'
         },
         locationsArray: [],
         nestedLocations: [],
