@@ -28,7 +28,7 @@ export default {
                     accessToken:"pk.eyJ1Ijoic2Vsc21pZSIsImEiOiJja2xub24zYmkwM2I3MndwaGd2cmphY2d0In0.pGKzXH4VZxv0ftDZvi4J4A",
                 }
             ).addTo(mapDiv);
-            L.circle(this.center, {color: 'red'}).addTo(mapDiv);
+            L.circle(this.center, {color: 'red', radius: 100}).addTo(mapDiv);
         }
         
     },
