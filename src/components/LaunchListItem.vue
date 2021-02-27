@@ -16,6 +16,7 @@ export default {
     methods: {
         handleClick() {
             eventBus.$emit('selected-launch', this.launch)
+            eventBus.$emit('restore-display')
         }
     }
 }

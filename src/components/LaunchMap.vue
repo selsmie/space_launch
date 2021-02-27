@@ -6,7 +6,6 @@
 <script>
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import {icon} from "leaflet";
 
 export default {
     name: 'Map',

@@ -41,9 +41,11 @@ export default {
     methods: {
         skipNext: function(){
             eventBus.$emit('skip-next', this.launch)
+            this.showMap = false
         },
         skipBack: function() {
             eventBus.$emit('skip-back', this.launch)
+            this.showMap = false
         },
         showMapClick: function(){
             if (!this.showMap) {
@@ -51,8 +53,11 @@ export default {
             } else {
                 this.showMap = false
             }
-        }
-    }    
+        },
+    },
+    mounted() {
+        eventBus.$on('restore-display', () => this.showMap = false)
+    }
 }
 </script>
 
