@@ -55,6 +55,15 @@ export default {
         .then(data => this.launches = data.results)
     },
 
+    // getLaunchData: function() {
+    //   const fetch1 = fetch('https://lldev.thespacedevs.com/2.0.0/launch/?limit=100&offset=1600')
+    //     .then(response => response.json())
+    //   const fetch2 = fetch('https://lldev.thespacedevs.com/2.0.0/launch/?limit=100&offset=1700')
+    //     .then(response => response.json())
+    //   Promise.all([fetch1, fetch2])
+    //     .then(data => this.launches = (data.results.flat(1)))
+    // },
+
     dateYear: function(year) {
       this.filteredLaunches = []
       this.launches.forEach((launch) => {
