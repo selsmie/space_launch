@@ -3,7 +3,8 @@
     <h1>Rocket Launches</h1>
     <div class='filter-area'>
       <select v-model='filterData'>
-        <option value="">All Launches</option>
+        <option disabled value="">Select Launches</option>
+        <option value="all">All Launches</option>
         <option value="year">Year</option>
         <option value="status">Mission Status</option>
       </select>
@@ -14,8 +15,8 @@
 
    
     <section>
-      <launch-list v-if="!filterData" :launches='launches'></launch-list>
-      <launch-list v-if="filterData" :launches='filteredLaunches'></launch-list>
+      <launch-list v-if="filterData==='all'" :launches='launches'></launch-list>
+      <launch-list v-if="filterData==='year' || filterData==='status'" :launches='filteredLaunches'></launch-list>
       <launch-details v-if="selectedLaunch" :launches='launches' :index='selectedLaunchIndex'></launch-details>
     </section>
     
@@ -97,6 +98,7 @@ body {
   box-sizing: border-box;
   background-image: url("https://cdn.mos.cms.futurecdn.net/xePTkUayyCCn7QnVXUjhTg.jpg");
   margin: 0;
+  height: 100%;
 }
 
 main {
@@ -107,21 +109,20 @@ main {
 
 h1 {
   text-align: center;
-  margin-bottom: 5px;
-  margin-top: 0px;
+  margin: 0px;
 }
 
 .filter-area {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 41px;
 }
 
 section {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   column-gap: 25px;
-  margin-bottom: 10px;
 }
 
 select {

@@ -5,24 +5,34 @@
             <h3 class='status'>{{launches[index].status.name}}</h3>
             <img :src="launches[index].image" alt="">
             <p id='date'>Date: {{launches[index].net | date}}</p>
-            <h3 class='company'>{{launches[index]['launch_service_provider'].name}}</h3 class='company'>
+            <h3 class='company'>{{launches[index]['launch_service_provider'].name}}</h3>
             <p id='obj'>Mission Brief</p>
-            <p id='description'>{{launches[index].mission.description}}</p>
+            <p id='description' v-if='!showMap'>{{launches[index].mission.description}}</p>
+            <launch-map v-if='showMap' :launch="launches[index]"></launch-map>
     </section>
+    
     <footer>
         <button v-if="index > 0" v-on:click="skipBack"><< Previous</button>
-        <button>Launch Map</button>
+        <button v-on:click="showMapClick">Launch Map</button>
         <button v-if="index < 99" v-on:click="skipNext">Next >></button>
     </footer>
+     
 </section>
 </template>
 
 <script>
 import { eventBus } from '../main.js'
+import LaunchMap from './LaunchMap'
 
 export default {
     name: 'launch-details',
+    data() {
+        return {
+            showMap: false
+        }
+    },
     props: ['launch', 'launches', 'index'],
+    components: {'launch-map': LaunchMap},
     filters: {
         date: function(dateString) {
             return new Date(dateString).toLocaleDateString()
@@ -34,8 +44,15 @@ export default {
         },
         skipBack: function() {
             eventBus.$emit('skip-back', this.launch)
+        },
+        showMapClick: function(){
+            if (!this.showMap) {
+                this.showMap = true
+            } else {
+                this.showMap = false
+            }
         }
-    }
+    }    
 }
 </script>
 
@@ -93,7 +110,7 @@ export default {
 img {
     width: auto;
     height: auto;
-    max-height: 300px;
+    max-height: 200px;
     max-width: 300px;
 }
 

@@ -26,4 +26,12 @@ export default {
 
 <style>
 
+
+label {
+    margin-left: 10px;
+}
+
+#year {
+    height: 25px;
+}
 </style>
