@@ -34,6 +34,7 @@ import YearSelection from './components/YearSelection'
 import StatusSelection from './components/StatusSelection'
 import LocationChart from './components/LocationChart'
 
+
 import {eventBus} from './main.js'
 
 export default {

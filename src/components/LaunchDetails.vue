@@ -14,7 +14,7 @@
     <footer>
         <button v-if="index > 0" v-on:click="skipBack"><< Previous</button>
         <button v-on:click="showMapClick">Launch Map</button>
-        <button v-if="index < 99" v-on:click="skipNext">Next >></button>
+        <button v-if="index < 199" v-on:click="skipNext">Next >></button>
     </footer>
      
 </section>
