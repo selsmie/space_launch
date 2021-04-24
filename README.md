@@ -1,29 +1,14 @@
-# space_launch
+# Space Launch Information
 
-## Project setup
-```
-npm install
-```
+### Brief
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Create a Vue application using an API and external libraries. 
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### MVP
+Using the Space Devs Launch API (https://thespacedevs.com/llapi) to gather selected launch information. 
+Display specific details along with a map display (using Leaflet). 
+Integrate Google Charts for additional library exposure. 
 
-### Run your unit tests
-```
-npm run test:unit
-```
+Install node modules using npm install. 
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Start the app using non run serve. 
