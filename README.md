@@ -9,6 +9,6 @@ Using the Space Devs Launch API (https://thespacedevs.com/llapi) to gather selec
 Display specific details along with a map display (using Leaflet). 
 Integrate Google Charts for additional library exposure. 
 
-Install node modules using npm install. 
+Install node modules using `npm install`. 
 
-Start the app using non run serve. 
+Start the app using `npm run serve`. 
