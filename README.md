@@ -1,6 +1,6 @@
 # Space Launch Information
 
-### Brief
+## Brief
 
 Create a Vue application using an API and external libraries. 
 
